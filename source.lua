@@ -1,3 +1,5 @@
+-- made by Gizmoscat (Zakmapping) it is open source for everyond
+
 local colorSettings =
 {
     ["Main"] = {
