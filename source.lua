@@ -1,4 +1,4 @@
--- made by Gizmoscat (Zakmapping) it is open source for everyond
+-- made by Gizmoscat (Zakmapping) it is open source for everyone, please read license before editing in the script
 
 local colorSettings =
 {
@@ -117,28 +117,6 @@ local function GetFullPathOfAnInstance(instance)
 
     return GetFullPathOfAnInstance(instance.Parent) .. head
 end
-
-local function AddButtonAnimation(button)
-    button.MouseButton1Down:Connect(function()
-        TweenService:Create(button, TweenInfo.new(0.1), {
-            Size = UDim2.new(button.Size.X.Scale * 0.95, button.Size.X.Offset * 0.95, 
-                            button.Size.Y.Scale * 0.95, button.Size.Y.Offset * 0.95)
-        }):Play()
-    end)
-    
-    button.MouseButton1Up:Connect(function()
-        TweenService:Create(button, TweenInfo.new(0.1), {
-            Size = button.Size
-        }):Play()
-    end)
-end
-
--- أضف هذه الوظيفة لجميع الأزرار المهمة
-AddButtonAnimation(CopyCode)
-AddButtonAnimation(RunCode)
-AddButtonAnimation(CopyScriptPath)
--- ... وهكذا لباقي الأزرار
-
 -- Main Script
 
 -- references to game functions (to prevent using namecall inside of a namecall hook)
@@ -689,32 +667,10 @@ CloseInfoFrame.Font = Enum.Font.SourceSansLight
 CloseInfoFrame.Text = "X"
 CloseInfoFrame.TextColor3 = Color3.fromRGB(0, 0, 0)
 CloseInfoFrame.TextSize = 20.000
-ImageButton.MouseButton1Click:Connect(function()
-    BrowserHeader.Size = UDim2.new(0, 0, 0, 33)
-    BrowserHeader.Visible = true
-    
-    local tween1 = TweenService:Create(BrowserHeader, tweenInfo, {Size = UDim2.new(0, 207, 0, 33)})
-    local tween2 = TweenService:Create(RemoteBrowserFrame, tweenInfo, {Size = UDim2.new(0, 207, 0, 286)})
-    
-    tween1:Play()
-    tween2:Play()
-    
-    -- الكود الأصلي لملء الريموت براوزر
-    for i, v in pairs(game:GetDescendants()) do
-        -- ... (الكود الأصلي)
-    end
-end)
-
-CloseInfoFrame2.MouseButton1Click:Connect(function()
-    local tween1 = TweenService:Create(BrowserHeader, tweenInfo, {Size = UDim2.new(0, 0, 0, 33)})
-    local tween2 = TweenService:Create(RemoteBrowserFrame, tweenInfo, {Size = UDim2.new(0, 0, 0, 286)})
-    
-    tween1.Completed:Connect(function()
-        BrowserHeader.Visible = false
-    end)
-    
-    tween1:Play()
-    tween2:Play()
+CloseInfoFrame.MouseButton1Click:Connect(function()
+    InfoFrame.Visible = false
+    InfoFrameOpen = false
+    mainFrame.Size = UDim2.new(0, 207, 0, 35)
 end)
 
 OpenInfoFrame.Name = "OpenInfoFrame"
@@ -729,31 +685,15 @@ OpenInfoFrame.Text = ">"
 OpenInfoFrame.TextColor3 = Color3.fromRGB(0, 0, 0)
 OpenInfoFrame.TextSize = 16.000
 OpenInfoFrame.MouseButton1Click:Connect(function()
-    if not InfoFrame.Visible then
-        mainFrame.Size = UDim2.new(0, 207, 0, 35)
-        InfoFrame.Size = UDim2.new(0, 0, 0, 322)
-        InfoFrame.Visible = true
-        InfoFrame.Position = UDim2.new(0.368, 0, -0.0000558, 0)
-        
-        local tween1 = TweenService:Create(mainFrame, tweenInfo, {Size = UDim2.new(0, 565, 0, 35)})
-        local tween2 = TweenService:Create(InfoFrame, tweenInfo, {Size = UDim2.new(0, 357, 0, 322)})
-        
-        tween1:Play()
-        tween2:Play()
-        OpenInfoFrame.Text = "<"
-    else
-        local tween1 = TweenService:Create(mainFrame, tweenInfo, {Size = UDim2.new(0, 207, 0, 35)})
-        local tween2 = TweenService:Create(InfoFrame, tweenInfo, {Size = UDim2.new(0, 0, 0, 322)})
-        
-        tween2.Completed:Connect(function()
-            InfoFrame.Visible = false
-        end)
-        
-        tween1:Play()
-        tween2:Play()
-        OpenInfoFrame.Text = ">"
-    end
-    InfoFrameOpen = not InfoFrameOpen
+        if not InfoFrame.Visible then
+                mainFrame.Size = UDim2.new(0, 565, 0, 35)
+                OpenInfoFrame.Text = "<"
+        elseif RemoteScrollFrame.Visible then
+                mainFrame.Size = UDim2.new(0, 207, 0, 35)
+                OpenInfoFrame.Text = ">"
+        end
+        InfoFrame.Visible = not InfoFrame.Visible
+        InfoFrameOpen = not InfoFrameOpen
 end)
 
 Minimize.Name = "Minimize"
