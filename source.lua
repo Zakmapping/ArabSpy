@@ -1172,4 +1172,4 @@ OldNamecall = hookmetamethod(game,"__namecall",function(...)
 end) end
 
     return OldNamecall(...)
-end)d)
+end)
