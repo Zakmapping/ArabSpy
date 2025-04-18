@@ -1,5 +1,3 @@
--- made by Gizmoscat (Zakmapping) it is open source for everyond
-
 local colorSettings =
 {
     ["Main"] = {
@@ -136,8 +134,8 @@ end
 --Important tables and GUI offsets
 local buttonOffset = -25
 local scrollSizeOffset = 287
-local functionImage = "http://www.roblox.com/asset/?id=124676392956162"
-local eventImage = "http://www.roblox.com/asset/?id=136686644525835"
+local functionImage = "http://www.roblox.com/asset/?id=413369623"
+local eventImage = "http://www.roblox.com/asset/?id=413369506"
 local remotes = {}
 local remoteArgs = {}
 local remoteButtons = {}
@@ -1167,9 +1165,6 @@ OldNamecall = hookmetamethod(game,"__namecall",function(...)
         end
         addToList(false, ...)
     end
-
-    return OldNamecall(...)
-end
 
     return OldNamecall(...)
 end)
